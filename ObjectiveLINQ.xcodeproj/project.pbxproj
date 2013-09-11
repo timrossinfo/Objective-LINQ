@@ -7,15 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22D4BF3F56844BDF9B3F4BA4 /* libPods-ObjectiveLINQTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C57BECA5F8C467D8BB0B02C /* libPods-ObjectiveLINQTests.a */; };
 		22D86C3D17DFF0A000D24A49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C3C17DFF0A000D24A49 /* Foundation.framework */; };
 		22D86C4217DFF0A000D24A49 /* ObjectiveLINQ.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22D86C4117DFF0A000D24A49 /* ObjectiveLINQ.h */; };
-		22D86C4417DFF0A000D24A49 /* ObjectiveLINQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D86C4317DFF0A000D24A49 /* ObjectiveLINQ.m */; };
 		22D86C4C17DFF0A100D24A49 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C4B17DFF0A100D24A49 /* SenTestingKit.framework */; };
 		22D86C4E17DFF0A100D24A49 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C4D17DFF0A100D24A49 /* UIKit.framework */; };
 		22D86C4F17DFF0A100D24A49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C3C17DFF0A000D24A49 /* Foundation.framework */; };
 		22D86C5217DFF0A100D24A49 /* libObjectiveLINQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C3917DFF0A000D24A49 /* libObjectiveLINQ.a */; };
 		22D86C5817DFF0A100D24A49 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22D86C5617DFF0A100D24A49 /* InfoPlist.strings */; };
-		22D86C5B17DFF0A100D24A49 /* ObjectiveLINQTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D86C5A17DFF0A100D24A49 /* ObjectiveLINQTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,14 +45,13 @@
 		22D86C3C17DFF0A000D24A49 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22D86C4017DFF0A000D24A49 /* ObjectiveLINQ-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveLINQ-Prefix.pch"; sourceTree = "<group>"; };
 		22D86C4117DFF0A000D24A49 /* ObjectiveLINQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveLINQ.h; sourceTree = "<group>"; };
-		22D86C4317DFF0A000D24A49 /* ObjectiveLINQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveLINQ.m; sourceTree = "<group>"; };
 		22D86C4A17DFF0A100D24A49 /* ObjectiveLINQTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectiveLINQTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D86C4B17DFF0A100D24A49 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		22D86C4D17DFF0A100D24A49 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		22D86C5517DFF0A100D24A49 /* ObjectiveLINQTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveLINQTests-Info.plist"; sourceTree = "<group>"; };
 		22D86C5717DFF0A100D24A49 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		22D86C5917DFF0A100D24A49 /* ObjectiveLINQTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveLINQTests.h; sourceTree = "<group>"; };
-		22D86C5A17DFF0A100D24A49 /* ObjectiveLINQTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveLINQTests.m; sourceTree = "<group>"; };
+		89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveLINQTests.xcconfig"; path = "Pods/Pods-ObjectiveLINQTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		8C57BECA5F8C467D8BB0B02C /* libPods-ObjectiveLINQTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ObjectiveLINQTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +71,7 @@
 				22D86C4E17DFF0A100D24A49 /* UIKit.framework in Frameworks */,
 				22D86C4F17DFF0A100D24A49 /* Foundation.framework in Frameworks */,
 				22D86C5217DFF0A100D24A49 /* libObjectiveLINQ.a in Frameworks */,
+				22D4BF3F56844BDF9B3F4BA4 /* libPods-ObjectiveLINQTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +85,7 @@
 				22D86C5317DFF0A100D24A49 /* ObjectiveLINQTests */,
 				22D86C3B17DFF0A000D24A49 /* Frameworks */,
 				22D86C3A17DFF0A000D24A49 /* Products */,
+				89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +104,7 @@
 				22D86C3C17DFF0A000D24A49 /* Foundation.framework */,
 				22D86C4B17DFF0A100D24A49 /* SenTestingKit.framework */,
 				22D86C4D17DFF0A100D24A49 /* UIKit.framework */,
+				8C57BECA5F8C467D8BB0B02C /* libPods-ObjectiveLINQTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				22D86C4117DFF0A000D24A49 /* ObjectiveLINQ.h */,
-				22D86C4317DFF0A000D24A49 /* ObjectiveLINQ.m */,
 				22D86C3F17DFF0A000D24A49 /* Supporting Files */,
 			);
 			path = ObjectiveLINQ;
@@ -129,8 +129,7 @@
 		22D86C5317DFF0A100D24A49 /* ObjectiveLINQTests */ = {
 			isa = PBXGroup;
 			children = (
-				22D86C5917DFF0A100D24A49 /* ObjectiveLINQTests.h */,
-				22D86C5A17DFF0A100D24A49 /* ObjectiveLINQTests.m */,
+				22D86C6417DFF23200D24A49 /* Specs */,
 				22D86C5417DFF0A100D24A49 /* Supporting Files */,
 			);
 			path = ObjectiveLINQTests;
@@ -143,6 +142,13 @@
 				22D86C5617DFF0A100D24A49 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22D86C6417DFF23200D24A49 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Specs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,10 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22D86C6117DFF0A100D24A49 /* Build configuration list for PBXNativeTarget "ObjectiveLINQTests" */;
 			buildPhases = (
+				9B89B6CEBBF94C66AD9745C6 /* Check Pods Manifest.lock */,
 				22D86C4517DFF0A100D24A49 /* Sources */,
 				22D86C4617DFF0A100D24A49 /* Frameworks */,
 				22D86C4717DFF0A100D24A49 /* Resources */,
 				22D86C4817DFF0A100D24A49 /* ShellScript */,
+				680A7D57A7B24609858729D3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,6 +244,36 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		680A7D57A7B24609858729D3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ObjectiveLINQTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B89B6CEBBF94C66AD9745C6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -243,7 +281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D86C4417DFF0A000D24A49 /* ObjectiveLINQ.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +288,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22D86C5B17DFF0A100D24A49 /* ObjectiveLINQTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,11 +392,9 @@
 		};
 		22D86C6217DFF0A100D24A49 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveLINQ/ObjectiveLINQ-Prefix.pch";
 				INFOPLIST_FILE = "ObjectiveLINQTests/ObjectiveLINQTests-Info.plist";
@@ -371,11 +405,9 @@
 		};
 		22D86C6317DFF0A100D24A49 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveLINQ/ObjectiveLINQ-Prefix.pch";
 				INFOPLIST_FILE = "ObjectiveLINQTests/ObjectiveLINQTests-Info.plist";
@@ -403,6 +435,7 @@
 				22D86C6017DFF0A100D24A49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22D86C6117DFF0A100D24A49 /* Build configuration list for PBXNativeTarget "ObjectiveLINQTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +444,7 @@
 				22D86C6317DFF0A100D24A49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
