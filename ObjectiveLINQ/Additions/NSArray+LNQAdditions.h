@@ -11,7 +11,7 @@
 
 @interface NSArray (LNQAdditions)
 
-@property (nonatomic, copy, readonly) LNQQuery *(^select)(NSString *attr);
-@property (nonatomic, copy, readonly) LNQQuery *(^where)(NSString *attr);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(NSString *attr);
+@property (nonatomic, copy, readonly) id<LNQWhereClause> (^where)(NSString *attr);
 
 @end

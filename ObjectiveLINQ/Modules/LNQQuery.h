@@ -8,13 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LNQQuery : NSObject
+@protocol LNQWhereClause;
 
-@property (nonatomic, copy, readonly) LNQQuery *(^select)(NSString *attr);
-@property (nonatomic, copy, readonly) LNQQuery *(^where)(NSString *attr);
-@property (nonatomic, copy, readonly) LNQQuery *(^equalTo)(id<NSObject> value);
+@protocol LNQQuery <NSObject>
+
+@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(NSString *attr);
+@property (nonatomic, copy, readonly) id<LNQWhereClause> (^where)(NSString *attr);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();
 @property (nonatomic, copy, readonly) id<NSObject> (^single)();
+
+@end
+
+@protocol LNQWhereClause <NSObject>
+
+@property (nonatomic, copy, readonly) id<LNQQuery> (^equalTo)(id<NSObject> value);
+
+@end
+
+@interface LNQQuery : NSObject<LNQQuery, LNQWhereClause>
 
 - (id)initWithArray:(NSArray *)array;
 

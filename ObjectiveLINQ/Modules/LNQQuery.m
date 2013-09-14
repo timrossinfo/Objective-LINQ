@@ -26,21 +26,21 @@
     return self;
 }
 
-- (LNQQuery *(^)(NSString *))select {
+- (id<LNQQuery> (^)(NSString *))select {
     return ^LNQQuery *(NSString * attr) {
         self.selectAttr = attr;
         return self;
     };
 }
 
-- (LNQQuery *(^)(NSString *))where {
+- (id<LNQWhereClause> (^)(NSString *))where {
     return ^LNQQuery *(NSString * attr) {
         self.whereAttr = attr;
         return self;
     };
 }
 
-- (LNQQuery *(^)(id<NSObject>))equalTo {
+- (id<LNQQuery> (^)(id<NSObject>))equalTo {
     return ^LNQQuery *(id<NSObject> value) {
         self.equalToValue = value;
         return self;
