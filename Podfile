@@ -1,6 +1,6 @@
 platform :ios, '6.0'
 
-target 'ObjectiveLINQTests', :exclusive => true do
+target 'ObjectiveLINQTests' do
     pod 'Specta'
     pod 'Expecta'
 end

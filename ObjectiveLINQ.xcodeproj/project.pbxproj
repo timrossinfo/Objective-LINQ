@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224E870917DFFBF100860527 /* LNQTestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 224E870817DFFBF100860527 /* LNQTestPerson.m */; };
+		226003AF17E3C322006E2687 /* LNQQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 226003AE17E3C322006E2687 /* LNQQuery.m */; };
 		22D4BF3F56844BDF9B3F4BA4 /* libPods-ObjectiveLINQTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C57BECA5F8C467D8BB0B02C /* libPods-ObjectiveLINQTests.a */; };
 		22D86C3D17DFF0A000D24A49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C3C17DFF0A000D24A49 /* Foundation.framework */; };
 		22D86C4217DFF0A000D24A49 /* ObjectiveLINQ.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22D86C4117DFF0A000D24A49 /* ObjectiveLINQ.h */; };
@@ -15,6 +17,8 @@
 		22D86C4F17DFF0A100D24A49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C3C17DFF0A000D24A49 /* Foundation.framework */; };
 		22D86C5217DFF0A100D24A49 /* libObjectiveLINQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D86C3917DFF0A000D24A49 /* libObjectiveLINQ.a */; };
 		22D86C5817DFF0A100D24A49 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22D86C5617DFF0A100D24A49 /* InfoPlist.strings */; };
+		22D86C9D17DFF5EB00D24A49 /* NSArray+LNQAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D86C9C17DFF5EB00D24A49 /* NSArray+LNQAdditions.m */; };
+		22D86CA217DFF60B00D24A49 /* NSArray+LNQAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D86CA017DFF60B00D24A49 /* NSArray+LNQAdditionsSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224E870717DFFBF100860527 /* LNQTestPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNQTestPerson.h; sourceTree = "<group>"; };
+		224E870817DFFBF100860527 /* LNQTestPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNQTestPerson.m; sourceTree = "<group>"; };
+		226003AD17E3C322006E2687 /* LNQQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNQQuery.h; sourceTree = "<group>"; };
+		226003AE17E3C322006E2687 /* LNQQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNQQuery.m; sourceTree = "<group>"; };
 		22D86C3917DFF0A000D24A49 /* libObjectiveLINQ.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveLINQ.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D86C3C17DFF0A000D24A49 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22D86C4017DFF0A000D24A49 /* ObjectiveLINQ-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveLINQ-Prefix.pch"; sourceTree = "<group>"; };
@@ -50,6 +58,10 @@
 		22D86C4D17DFF0A100D24A49 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		22D86C5517DFF0A100D24A49 /* ObjectiveLINQTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveLINQTests-Info.plist"; sourceTree = "<group>"; };
 		22D86C5717DFF0A100D24A49 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22D86C9B17DFF5EB00D24A49 /* NSArray+LNQAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LNQAdditions.h"; sourceTree = "<group>"; };
+		22D86C9C17DFF5EB00D24A49 /* NSArray+LNQAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LNQAdditions.m"; sourceTree = "<group>"; };
+		22D86CA017DFF60B00D24A49 /* NSArray+LNQAdditionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LNQAdditionsSpec.m"; sourceTree = "<group>"; };
+		22D86CA317DFF6CE00D24A49 /* ObjectiveLINQTests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ObjectiveLINQTests-Prefix.pch"; sourceTree = "<group>"; };
 		89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveLINQTests.xcconfig"; path = "Pods/Pods-ObjectiveLINQTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		8C57BECA5F8C467D8BB0B02C /* libPods-ObjectiveLINQTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ObjectiveLINQTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				22D86C4117DFF0A000D24A49 /* ObjectiveLINQ.h */,
+				22D86C9917DFF57B00D24A49 /* Additions */,
+				22D86C9A17DFF58100D24A49 /* Modules */,
 				22D86C3F17DFF0A000D24A49 /* Supporting Files */,
 			);
 			path = ObjectiveLINQ;
@@ -139,6 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				22D86C5517DFF0A100D24A49 /* ObjectiveLINQTests-Info.plist */,
+				224E870717DFFBF100860527 /* LNQTestPerson.h */,
+				224E870817DFFBF100860527 /* LNQTestPerson.m */,
+				22D86CA317DFF6CE00D24A49 /* ObjectiveLINQTests-Prefix.pch */,
 				22D86C5617DFF0A100D24A49 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -147,8 +164,27 @@
 		22D86C6417DFF23200D24A49 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				22D86CA017DFF60B00D24A49 /* NSArray+LNQAdditionsSpec.m */,
 			);
 			path = Specs;
+			sourceTree = "<group>";
+		};
+		22D86C9917DFF57B00D24A49 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				22D86C9B17DFF5EB00D24A49 /* NSArray+LNQAdditions.h */,
+				22D86C9C17DFF5EB00D24A49 /* NSArray+LNQAdditions.m */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		22D86C9A17DFF58100D24A49 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				226003AD17E3C322006E2687 /* LNQQuery.h */,
+				226003AE17E3C322006E2687 /* LNQQuery.m */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +317,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D86C9D17DFF5EB00D24A49 /* NSArray+LNQAdditions.m in Sources */,
+				226003AF17E3C322006E2687 /* LNQQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +326,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D86CA217DFF60B00D24A49 /* NSArray+LNQAdditionsSpec.m in Sources */,
+				224E870917DFFBF100860527 /* LNQTestPerson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,9 +434,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ObjectiveLINQ/ObjectiveLINQ-Prefix.pch";
+				GCC_PREFIX_HEADER = "ObjectiveLINQTests/ObjectiveLINQTests-Prefix.pch";
 				INFOPLIST_FILE = "ObjectiveLINQTests/ObjectiveLINQTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
@@ -407,9 +451,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C927FC4EC945DE854E2727 /* Pods-ObjectiveLINQTests.xcconfig */;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ObjectiveLINQ/ObjectiveLINQ-Prefix.pch";
+				GCC_PREFIX_HEADER = "ObjectiveLINQTests/ObjectiveLINQTests-Prefix.pch";
 				INFOPLIST_FILE = "ObjectiveLINQTests/ObjectiveLINQTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
