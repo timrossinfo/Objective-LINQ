@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222B6CD617E4379200C39CBE /* LNQOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 222B6CD517E4379200C39CBE /* LNQOperator.m */; };
 		224E870917DFFBF100860527 /* LNQTestPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 224E870817DFFBF100860527 /* LNQTestPerson.m */; };
 		226003AF17E3C322006E2687 /* LNQQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 226003AE17E3C322006E2687 /* LNQQuery.m */; };
 		22D4BF3F56844BDF9B3F4BA4 /* libPods-ObjectiveLINQTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C57BECA5F8C467D8BB0B02C /* libPods-ObjectiveLINQTests.a */; };
@@ -45,6 +46,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		222B6CD417E4379200C39CBE /* LNQOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNQOperator.h; sourceTree = "<group>"; };
+		222B6CD517E4379200C39CBE /* LNQOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNQOperator.m; sourceTree = "<group>"; };
 		224E870717DFFBF100860527 /* LNQTestPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNQTestPerson.h; sourceTree = "<group>"; };
 		224E870817DFFBF100860527 /* LNQTestPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNQTestPerson.m; sourceTree = "<group>"; };
 		226003AD17E3C322006E2687 /* LNQQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNQQuery.h; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 			children = (
 				226003AD17E3C322006E2687 /* LNQQuery.h */,
 				226003AE17E3C322006E2687 /* LNQQuery.m */,
+				222B6CD417E4379200C39CBE /* LNQOperator.h */,
+				222B6CD517E4379200C39CBE /* LNQOperator.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 			files = (
 				22D86C9D17DFF5EB00D24A49 /* NSArray+LNQAdditions.m in Sources */,
 				226003AF17E3C322006E2687 /* LNQQuery.m in Sources */,
+				222B6CD617E4379200C39CBE /* LNQOperator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

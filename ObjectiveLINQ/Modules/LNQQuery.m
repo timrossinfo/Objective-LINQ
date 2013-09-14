@@ -7,13 +7,12 @@
 //
 
 #import "LNQQuery.h"
+#import "LNQOperator.h"
 
 @interface LNQQuery()
 
 @property (nonatomic, strong) NSArray *inputArray;
-@property (nonatomic, copy) NSString *selectAttr;
-@property (nonatomic, copy) NSString *whereAttr;
-@property (nonatomic, strong) id<NSObject> equalToValue;
+@property (nonatomic, strong) NSMutableArray *operators;
 
 @end
 
@@ -22,44 +21,60 @@
 - (id)initWithArray:(NSArray *)array {
     if ((self = [super init])) {
         _inputArray = [array copy];
+        _operators = [NSMutableArray array];
     }
     return self;
 }
 
 - (id<LNQQuery> (^)(NSString *))select {
-    return ^LNQQuery *(NSString * attr) {
-        self.selectAttr = attr;
+    return ^id<LNQQuery> (NSString * attr) {
+        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeSelect value:attr]];
         return self;
     };
 }
 
 - (id<LNQWhereClause> (^)(NSString *))where {
-    return ^LNQQuery *(NSString * attr) {
-        self.whereAttr = attr;
+    return ^id<LNQWhereClause> (NSString * attr) {
+        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeWhere value:attr]];
         return self;
     };
 }
 
-- (id<LNQQuery> (^)(id<NSObject>))equalTo {
-    return ^LNQQuery *(id<NSObject> value) {
-        self.equalToValue = value;
+- (id<LNQQuery, LNQWhereClause> (^)(id))equalTo {
+    return ^id<LNQQuery, LNQWhereClause> (id value) {
+        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeEqualTo value:value]];
+        return self;
+    };
+}
+
+- (id<LNQWhereClause> (^)(NSString *))and {
+    return ^id<LNQWhereClause> (NSString * attr) {
+        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeAnd value:attr]];
         return self;
     };
 }
 
 - (NSArray *)executeQuery {
     NSArray *result = [NSArray arrayWithArray:_inputArray];
-    if (_selectAttr) {
-        result = [result valueForKeyPath:_selectAttr];
-    }
-    if (_whereAttr) {
-        if (_equalToValue) {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", _whereAttr, _equalToValue];
-            NSLog(@"Predicate: %@", predicate);
-            result = [result filteredArrayUsingPredicate:predicate];
+    NSString *whereAttr = nil;
+    for (LNQOperator *operator in _operators) {
+        switch (operator.type) {
+            case LNQOperatorTypeSelect:
+                result = [result valueForKeyPath:operator.value];
+                break;
+            case LNQOperatorTypeWhere:
+            case LNQOperatorTypeAnd:
+                whereAttr = operator.value;
+                break;
+            case LNQOperatorTypeEqualTo: {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", whereAttr, operator.value];
+                result = [result filteredArrayUsingPredicate:predicate];
+                break;
+            }
+            default:
+                break;
         }
     }
-    NSLog(@"result: %@", result);
     return [result copy];
 }
 
@@ -69,7 +84,7 @@
     };
 }
 
-- (id<NSObject> (^)())single {
+- (id (^)())single {
     return ^() {
         return [[self executeQuery] lastObject];
     };
