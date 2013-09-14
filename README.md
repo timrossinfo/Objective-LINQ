@@ -1,4 +1,4 @@
 Objective-LINQ
 =============
 
-An implementation of Language Integrated Query (LINQ) for Objective-C
+Objective-LINQ makes it easy to perform query operations on NSArray objects.
