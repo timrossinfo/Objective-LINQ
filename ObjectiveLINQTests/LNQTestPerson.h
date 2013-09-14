@@ -10,6 +10,9 @@
 
 @interface LNQTestPerson : NSObject
 
++ (LNQTestPerson *)personBob;
++ (LNQTestPerson *)personMary;
+
 @property (nonatomic, copy) NSString *firstName;
 @property (nonatomic, copy) NSString *lastName;
 

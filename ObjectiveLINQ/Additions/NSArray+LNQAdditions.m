@@ -10,10 +10,15 @@
 
 @implementation NSArray (LNQAdditions)
 
-- (LNQQuery *(^)(id))select {
-    return ^id(id attr) {
-        LNQQuery *query = [[LNQQuery alloc] initWithArray:self];
-        return query.select(attr);
+- (LNQQuery *(^)(NSString *))select {
+    return ^LNQQuery *(NSString *attr) {
+        return [[LNQQuery alloc] initWithArray:self].select(attr);
+    };
+}
+
+- (LNQQuery *(^)(NSString *))where {
+    return ^LNQQuery *(NSString *attr) {
+        return [[LNQQuery alloc] initWithArray:self].where(attr);
     };
 }
 

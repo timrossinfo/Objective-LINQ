@@ -10,8 +10,11 @@
 
 @interface LNQQuery : NSObject
 
-@property (nonatomic, copy, readonly) LNQQuery *(^select)(id attr);
+@property (nonatomic, copy, readonly) LNQQuery *(^select)(NSString *attr);
+@property (nonatomic, copy, readonly) LNQQuery *(^where)(NSString *attr);
+@property (nonatomic, copy, readonly) LNQQuery *(^equalTo)(id<NSObject> value);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();
+@property (nonatomic, copy, readonly) id<NSObject> (^single)();
 
 - (id)initWithArray:(NSArray *)array;
 

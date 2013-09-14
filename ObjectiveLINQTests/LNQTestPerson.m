@@ -10,4 +10,16 @@
 
 @implementation LNQTestPerson
 
++ (LNQTestPerson *)personBob {
+    LNQTestPerson *person = [LNQTestPerson new];
+    person.firstName = @"Bob";
+    return person;
+}
+
++ (LNQTestPerson *)personMary {
+    LNQTestPerson *person = [LNQTestPerson new];
+    person.firstName = @"Mary";
+    return person;
+}
+
 @end

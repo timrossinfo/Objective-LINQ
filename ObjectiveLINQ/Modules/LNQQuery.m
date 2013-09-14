@@ -10,7 +10,10 @@
 
 @interface LNQQuery()
 
-@property (nonatomic, strong) NSArray *internalArray;
+@property (nonatomic, strong) NSArray *inputArray;
+@property (nonatomic, copy) NSString *selectAttr;
+@property (nonatomic, copy) NSString *whereAttr;
+@property (nonatomic, strong) id<NSObject> equalToValue;
 
 @end
 
@@ -18,21 +21,57 @@
 
 - (id)initWithArray:(NSArray *)array {
     if ((self = [super init])) {
-        _internalArray = [array copy];
+        _inputArray = [array copy];
     }
     return self;
 }
 
-- (LNQQuery *(^)(id))select {
-    return ^id(id attr) {
-        self.internalArray = [_internalArray valueForKeyPath:attr];
+- (LNQQuery *(^)(NSString *))select {
+    return ^LNQQuery *(NSString * attr) {
+        self.selectAttr = attr;
         return self;
     };
 }
 
+- (LNQQuery *(^)(NSString *))where {
+    return ^LNQQuery *(NSString * attr) {
+        self.whereAttr = attr;
+        return self;
+    };
+}
+
+- (LNQQuery *(^)(id<NSObject>))equalTo {
+    return ^LNQQuery *(id<NSObject> value) {
+        self.equalToValue = value;
+        return self;
+    };
+}
+
+- (NSArray *)executeQuery {
+    NSArray *result = [NSArray arrayWithArray:_inputArray];
+    if (_selectAttr) {
+        result = [result valueForKeyPath:_selectAttr];
+    }
+    if (_whereAttr) {
+        if (_equalToValue) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", _whereAttr, _equalToValue];
+            NSLog(@"Predicate: %@", predicate);
+            result = [result filteredArrayUsingPredicate:predicate];
+        }
+    }
+    NSLog(@"result: %@", result);
+    return [result copy];
+}
+
 - (NSArray *(^)())toArray {
     return ^() {
-        return [_internalArray copy];
+        return [self executeQuery];
+    };
+}
+
+- (id<NSObject> (^)())single {
+    return ^() {
+        return [[self executeQuery] lastObject];
     };
 }
 

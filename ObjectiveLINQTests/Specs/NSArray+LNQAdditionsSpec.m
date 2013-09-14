@@ -13,16 +13,23 @@ SpecBegin(NSArray_LNQAdditions)
 
 describe(@"select", ^{
     it(@"should select fields from an array of objects", ^{
-        LNQTestPerson *personBob = [LNQTestPerson new];
-        personBob.firstName = @"Bob";
-        LNQTestPerson *personMary = [LNQTestPerson new];
-        personMary.firstName = @"Mary";
+        NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
         
-        NSArray *people = @[personBob, personMary];
         NSArray *firstNames = people.select(@"firstName").toArray();
         
         NSArray *expectedNames = @[@"Bob", @"Mary"];
         expect(firstNames).to.equal(expectedNames);
+    });
+});
+
+describe(@"where", ^{
+    it(@"should filter array based on a condition", ^{
+        LNQTestPerson *personBob = [LNQTestPerson personBob];
+        NSArray *people = @[personBob, [LNQTestPerson personMary]];
+        
+        LNQTestPerson *result = people.where(@"firstName").equalTo(@"Bob").single();
+        
+        expect(result).to.equal(personBob);
     });
 });
 
