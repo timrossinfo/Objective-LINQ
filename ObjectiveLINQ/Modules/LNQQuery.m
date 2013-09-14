@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSArray *inputArray;
 @property (nonatomic, strong) NSMutableArray *operators;
 
+- (NSArray *)arrayByMappingArray:(NSArray *)array usingBlock:(LNQOperatorBlock)block;
+
 @end
 
 @implementation LNQQuery
@@ -26,15 +28,15 @@
     return self;
 }
 
-- (id<LNQQuery> (^)(NSString *))select {
-    return ^id<LNQQuery> (NSString * attr) {
+- (id<LNQQuery> (^)(id))select {
+    return ^id<LNQQuery> (id attr) {
         [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeSelect value:attr]];
         return self;
     };
 }
 
-- (id<LNQWhereClause> (^)(NSString *))where {
-    return ^id<LNQWhereClause> (NSString * attr) {
+- (id<LNQWhereClause> (^)(id))where {
+    return ^id<LNQWhereClause> (id attr) {
         [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeWhere value:attr]];
         return self;
     };
@@ -47,7 +49,7 @@
     };
 }
 
-- (id<LNQWhereClause> (^)(NSString *))and {
+- (id<LNQWhereClause> (^)(id))and {
     return ^id<LNQWhereClause> (NSString * attr) {
         [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeAnd value:attr]];
         return self;
@@ -56,12 +58,18 @@
 
 - (NSArray *)executeQuery {
     NSArray *result = [NSArray arrayWithArray:_inputArray];
-    NSString *whereAttr = nil;
+    id whereAttr = nil;
     for (LNQOperator *operator in _operators) {
         switch (operator.type) {
-            case LNQOperatorTypeSelect:
-                result = [result valueForKeyPath:operator.value];
+            case LNQOperatorTypeSelect: {
+                if ([operator.value isKindOfClass:[NSString class]]) {
+                    result = [result valueForKeyPath:operator.value];
+                } else {
+                    LNQOperatorBlock operatorBlock = (LNQOperatorBlock)operator.value;
+                    result = [self arrayByMappingArray:result usingBlock:operatorBlock];
+                }
                 break;
+            }
             case LNQOperatorTypeWhere:
             case LNQOperatorTypeAnd:
                 whereAttr = operator.value;
@@ -88,6 +96,14 @@
     return ^() {
         return [[self executeQuery] lastObject];
     };
+}
+
+- (NSArray *)arrayByMappingArray:(NSArray *)array usingBlock:(LNQOperatorBlock)block {
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:array.count];
+    for (id obj in array) {
+        [arr addObject:block(obj)];
+    }
+    return [arr copy];
 }
 
 @end

@@ -10,14 +10,14 @@
 
 @implementation NSArray (LNQAdditions)
 
-- (id<LNQQuery> (^)(NSString *))select {
-    return ^id<LNQQuery> (NSString *attr) {
+- (id<LNQQuery> (^)(id))select {
+    return ^id<LNQQuery> (id attr) {
         return [[LNQQuery alloc] initWithArray:self].select(attr);
     };
 }
 
-- (id<LNQWhereClause> (^)(NSString *))where {
-    return ^id<LNQWhereClause>(NSString *attr) {
+- (id<LNQWhereClause> (^)(id))where {
+    return ^id<LNQWhereClause>(id attr) {
         return [[LNQQuery alloc] initWithArray:self].where(attr);
     };
 }

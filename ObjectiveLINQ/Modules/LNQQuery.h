@@ -13,14 +13,14 @@
 @protocol LNQWhereClause <NSObject>
 
 @property (nonatomic, copy, readonly) id<LNQQuery, LNQWhereClause> (^equalTo)(id value);
-@property (nonatomic, copy, readonly) id<LNQWhereClause> (^and)(NSString *attr);
+@property (nonatomic, copy, readonly) id<LNQWhereClause> (^and)(id attr);
 
 @end
 
 @protocol LNQQuery <NSObject>
 
-@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(NSString *attr);
-@property (nonatomic, copy, readonly) id<LNQWhereClause> (^where)(NSString *attr);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(id attr);
+@property (nonatomic, copy, readonly) id<LNQWhereClause> (^where)(id attr);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();
 @property (nonatomic, copy, readonly) id (^single)();
 

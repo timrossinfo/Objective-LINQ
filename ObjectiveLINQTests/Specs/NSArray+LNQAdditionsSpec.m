@@ -12,13 +12,21 @@
 SpecBegin(NSArray_LNQAdditions)
 
 describe(@"select", ^{
-    it(@"should select values from an array of objects", ^{
-        NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
-        
-        NSArray *firstNames = people.select(@"firstName").toArray();
-        
-        NSArray *expectedNames = @[@"Bob", @"Mary"];
-        expect(firstNames).to.equal(expectedNames);
+    NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
+    NSArray *expectedNames = @[@"Bob", @"Mary"];
+    
+    describe(@"using property name", ^{
+        it(@"should return array of property values", ^{
+            NSArray *firstNames = people.select(@"firstName").toArray();
+            expect(firstNames).to.equal(expectedNames);
+        });
+    });
+    
+    describe(@"using block", ^{
+        it(@"should return array of results returned by the block", ^{
+            NSArray *firstNames = people.select(^(LNQTestPerson *p) {return p.firstName;}).toArray();
+            expect(firstNames).to.equal(expectedNames);
+        });
     });
 });
 

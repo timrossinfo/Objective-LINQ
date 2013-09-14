@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef id (^LNQOperatorBlock)(id);
+
 typedef enum LNQOperatorType {
     LNQOperatorTypeSelect,
     LNQOperatorTypeWhere,
