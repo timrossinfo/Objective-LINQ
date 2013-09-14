@@ -31,14 +31,16 @@ describe(@"select", ^{
 });
 
 describe(@"where", ^{
-    it(@"should filter array based on conditions", ^{
-        LNQTestPerson *personBobSmith = [LNQTestPerson personBob];
-        personBobSmith.lastName = @"Smith";
-        NSArray *people = @[personBobSmith, [LNQTestPerson personMary], [LNQTestPerson personBob]];
-        
-        LNQTestPerson *result = people.where(@"firstName").equalTo(@"Bob").and(@"lastName").equalTo(@"Smith").single();
-        
-        expect(result).to.equal(personBobSmith);
+    describe(@"with multiple conditions", ^{
+        it(@"should return filtered array", ^{
+            LNQTestPerson *personBobSmith = [LNQTestPerson personBob];
+            personBobSmith.lastName = @"Smith";
+            NSArray *people = @[personBobSmith, [LNQTestPerson personMary], [LNQTestPerson personBob]];
+            
+            LNQTestPerson *result = people.where(@"firstName").equalTo(@"Bob").and(@"lastName").equalTo(@"Smith").single();
+            
+            expect(result).to.equal(personBobSmith);
+        });
     });
 });
 
