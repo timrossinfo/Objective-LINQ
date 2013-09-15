@@ -7,26 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol LNQQuery;
-
-@protocol LNQWhereClause <NSObject>
-
-@property (nonatomic, copy, readonly) id<LNQQuery, LNQWhereClause> (^equalTo)(id value);
-@property (nonatomic, copy, readonly) id<LNQWhereClause> (^and)(id attr);
-
-@end
+#import "LNQProjection.h"
+#import "LNQFilter.h"
 
 @protocol LNQQuery <NSObject>
 
-@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(id attr);
-@property (nonatomic, copy, readonly) id<LNQWhereClause> (^where)(id attr);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQFilterBlock filterBlock);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();
 @property (nonatomic, copy, readonly) id (^single)();
 
 @end
 
-@interface LNQQuery : NSObject<LNQQuery, LNQWhereClause>
+@interface LNQQuery : NSObject<LNQQuery>
 
 - (id)initWithArray:(NSArray *)array;
 

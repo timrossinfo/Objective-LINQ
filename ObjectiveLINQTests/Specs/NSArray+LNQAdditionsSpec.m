@@ -12,35 +12,27 @@
 SpecBegin(NSArray_LNQAdditions)
 
 describe(@"select", ^{
-    NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
-    NSArray *expectedNames = @[@"Bob", @"Mary"];
-    
-    describe(@"using property name", ^{
-        it(@"should return array of property values", ^{
-            NSArray *firstNames = people.select(@"firstName").toArray();
-            expect(firstNames).to.equal(expectedNames);
-        });
-    });
-    
-    describe(@"using block", ^{
-        it(@"should return array of results returned by the block", ^{
-            NSArray *firstNames = people.select(^(LNQTestPerson *p) {return p.firstName;}).toArray();
-            expect(firstNames).to.equal(expectedNames);
-        });
+    it(@"should return array of results projected by the block", ^{
+        NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
+        
+        NSArray *firstNames = people.select(^(LNQTestPerson *p) {
+            return p.firstName;
+        }).toArray();
+        
+        NSArray *expectedNames = @[@"Bob", @"Mary"];
+        expect(firstNames).to.equal(expectedNames);
     });
 });
 
 describe(@"where", ^{
-    describe(@"with multiple conditions", ^{
-        it(@"should return filtered array", ^{
-            LNQTestPerson *personBobSmith = [LNQTestPerson personBob];
-            personBobSmith.lastName = @"Smith";
-            NSArray *people = @[personBobSmith, [LNQTestPerson personMary], [LNQTestPerson personBob]];
-            
-            LNQTestPerson *result = people.where(@"firstName").equalTo(@"Bob").and(@"lastName").equalTo(@"Smith").single();
-            
-            expect(result).to.equal(personBobSmith);
-        });
+    it(@"should return array of results filtered by block", ^{
+        NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
+        
+        LNQTestPerson *result = people.where(^(LNQTestPerson *p) {
+            return [p.firstName isEqualToString:@"Bob"];
+        }).single();
+        
+        expect(result.firstName).to.equal(@"Bob");
     });
 });
 

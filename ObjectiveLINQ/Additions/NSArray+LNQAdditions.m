@@ -10,16 +10,34 @@
 
 @implementation NSArray (LNQAdditions)
 
-- (id<LNQQuery> (^)(id))select {
-    return ^id<LNQQuery> (id attr) {
-        return [[LNQQuery alloc] initWithArray:self].select(attr);
+- (id<LNQQuery> (^)(LNQProjectionBlock))select {
+    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
+        return [[LNQQuery alloc] initWithArray:self].select(projectionBlock);
     };
 }
 
-- (id<LNQWhereClause> (^)(id))where {
-    return ^id<LNQWhereClause>(id attr) {
-        return [[LNQQuery alloc] initWithArray:self].where(attr);
+- (id<LNQQuery> (^)(LNQFilterBlock))where {
+    return ^id<LNQQuery>(LNQFilterBlock filterBlock) {
+        return [[LNQQuery alloc] initWithArray:self].where(filterBlock);
     };
+}
+
+- (NSArray *)arrayByMappingArrayUsingProjectionBlock:(LNQProjectionBlock)projectionBlock {
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
+    for (id obj in self) {
+        [arr addObject:projectionBlock(obj)];
+    }
+    return [arr copy];
+}
+
+- (NSArray *)arrayByFilteringArrayUsingFilterBlock:(LNQFilterBlock)filterBlock {
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
+    for (id obj in self) {
+        if (filterBlock(obj)) {
+            [arr addObject:obj];
+        }
+    }
+    return [arr copy];
 }
 
 @end

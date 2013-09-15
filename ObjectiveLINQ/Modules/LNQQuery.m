@@ -7,14 +7,12 @@
 //
 
 #import "LNQQuery.h"
-#import "LNQOperator.h"
+#import "NSArray+LNQAdditions.h"
 
 @interface LNQQuery()
 
 @property (nonatomic, strong) NSArray *inputArray;
 @property (nonatomic, strong) NSMutableArray *operators;
-
-- (NSArray *)arrayByMappingArray:(NSArray *)array usingBlock:(LNQOperatorBlock)block;
 
 @end
 
@@ -28,59 +26,29 @@
     return self;
 }
 
-- (id<LNQQuery> (^)(id))select {
-    return ^id<LNQQuery> (id attr) {
-        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeSelect value:attr]];
+- (id<LNQQuery> (^)(LNQProjectionBlock))select {
+    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
+        [_operators addObject:[[LNQProjection alloc] initWithBlock:projectionBlock]];
         return self;
     };
 }
 
-- (id<LNQWhereClause> (^)(id))where {
-    return ^id<LNQWhereClause> (id attr) {
-        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeWhere value:attr]];
-        return self;
-    };
-}
-
-- (id<LNQQuery, LNQWhereClause> (^)(id))equalTo {
-    return ^id<LNQQuery, LNQWhereClause> (id value) {
-        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeEqualTo value:value]];
-        return self;
-    };
-}
-
-- (id<LNQWhereClause> (^)(id))and {
-    return ^id<LNQWhereClause> (NSString * attr) {
-        [_operators addObject:[[LNQOperator alloc] initWithType:LNQOperatorTypeAnd value:attr]];
+- (id<LNQQuery> (^)(LNQFilterBlock))where {
+    return ^id<LNQQuery> (LNQFilterBlock filterBlock) {
+        [_operators addObject:[[LNQFilter alloc] initWithBlock:filterBlock]];
         return self;
     };
 }
 
 - (NSArray *)executeQuery {
     NSArray *result = [NSArray arrayWithArray:_inputArray];
-    id whereAttr = nil;
-    for (LNQOperator *operator in _operators) {
-        switch (operator.type) {
-            case LNQOperatorTypeSelect: {
-                if ([operator.value isKindOfClass:[NSString class]]) {
-                    result = [result valueForKeyPath:operator.value];
-                } else {
-                    LNQOperatorBlock operatorBlock = (LNQOperatorBlock)operator.value;
-                    result = [self arrayByMappingArray:result usingBlock:operatorBlock];
-                }
-                break;
-            }
-            case LNQOperatorTypeWhere:
-            case LNQOperatorTypeAnd:
-                whereAttr = operator.value;
-                break;
-            case LNQOperatorTypeEqualTo: {
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", whereAttr, operator.value];
-                result = [result filteredArrayUsingPredicate:predicate];
-                break;
-            }
-            default:
-                break;
+    for (id<LNQQueryOperator> operator in _operators) {
+        if ([operator isKindOfClass:[LNQProjection class]]) {
+            LNQProjection *projection = (LNQProjection *)operator;
+            result = [result arrayByMappingArrayUsingProjectionBlock:projection.block];
+        } else if ([operator isKindOfClass:[LNQFilter class]]) {
+            LNQFilter *filter = (LNQFilter *)operator;
+            result = [result arrayByFilteringArrayUsingFilterBlock:filter.block];
         }
     }
     return [result copy];
@@ -96,14 +64,6 @@
     return ^() {
         return [[self executeQuery] lastObject];
     };
-}
-
-- (NSArray *)arrayByMappingArray:(NSArray *)array usingBlock:(LNQOperatorBlock)block {
-    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:array.count];
-    for (id obj in array) {
-        [arr addObject:block(obj)];
-    }
-    return [arr copy];
 }
 
 @end

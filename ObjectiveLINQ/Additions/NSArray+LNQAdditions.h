@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "LNQQuery.h"
+#import "LNQProjection.h"
 
 @interface NSArray (LNQAdditions)
 
-@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(id attr);
-@property (nonatomic, copy, readonly) id<LNQWhereClause> (^where)(id attr);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQFilterBlock filterBlock);
+
+- (NSArray *)arrayByMappingArrayUsingProjectionBlock:(LNQProjectionBlock)projectionBlock;
+- (NSArray *)arrayByFilteringArrayUsingFilterBlock:(LNQFilterBlock)filterBlock;
 
 @end
