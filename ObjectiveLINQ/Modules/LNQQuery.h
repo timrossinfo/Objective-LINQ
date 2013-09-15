@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQFilterBlock filterBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^orderBy)(NSString *key);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^orderByDescending)(NSString *key);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();
 @property (nonatomic, copy, readonly) id (^single)();
 

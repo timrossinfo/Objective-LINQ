@@ -25,7 +25,7 @@ describe(@"select", ^{
 });
 
 describe(@"where", ^{
-    it(@"should return array of results filtered by block", ^{
+    it(@"should return array filtered by block", ^{
         NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
         
         LNQTestPerson *result = people.where(^(LNQTestPerson *p) {
@@ -33,6 +33,32 @@ describe(@"where", ^{
         }).single();
         
         expect(result.firstName).to.equal(@"Bob");
+    });
+});
+
+describe(@"orderBy", ^{
+    it(@"should return array of results ordered by key", ^{
+        NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
+        
+        NSArray *firstNames = people.orderBy(@"firstName").select(^(LNQTestPerson *p) {
+            return p.firstName;
+        }).toArray();
+        
+        NSArray *expectedNames = @[@"Bob", @"Mary"];
+        expect(firstNames).to.equal(expectedNames);
+    });
+});
+
+describe(@"orderByDescending", ^{
+    it(@"should return array of results ordered by key in descending order", ^{
+        NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
+        
+        NSArray *firstNames = people.orderByDescending(@"firstName").select(^(LNQTestPerson *p) {
+            return p.firstName;
+        }).toArray();
+        
+        NSArray *expectedNames = @[@"Mary", @"Bob"];
+        expect(firstNames).to.equal(expectedNames);
     });
 });
 

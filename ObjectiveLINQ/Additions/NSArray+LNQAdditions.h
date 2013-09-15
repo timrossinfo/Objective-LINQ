@@ -9,13 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "LNQQuery.h"
 #import "LNQProjection.h"
+#import "LNQSortDescriptor.h"
 
 @interface NSArray (LNQAdditions)
 
 @property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQFilterBlock filterBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^orderBy)(NSString *key);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^orderByDescending)(NSString *key);
 
-- (NSArray *)arrayByMappingArrayUsingProjectionBlock:(LNQProjectionBlock)projectionBlock;
-- (NSArray *)arrayByFilteringArrayUsingFilterBlock:(LNQFilterBlock)filterBlock;
+- (NSArray *)LNQ_mappedArrayUsingProjection:(LNQProjection *)projection;
+- (NSArray *)LNQ_filteredArrayUsingFilter:(LNQFilter *)filter;
+- (NSArray *)LNQ_sortedArrayUsingDescriptor:(LNQSortDescriptor *)sortDescriptor;
 
 @end

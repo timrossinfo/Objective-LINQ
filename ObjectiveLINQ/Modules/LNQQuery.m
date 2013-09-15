@@ -7,6 +7,7 @@
 //
 
 #import "LNQQuery.h"
+#import "LNQSortDescriptor.h"
 #import "NSArray+LNQAdditions.h"
 
 @interface LNQQuery()
@@ -40,15 +41,32 @@
     };
 }
 
+- (id<LNQQuery> (^)(NSString *))orderBy {
+    return ^id<LNQQuery> (NSString *key) {
+        [_operators addObject:[[LNQSortDescriptor alloc] initWithKey:key descending:NO]];
+        return self;
+    };
+}
+
+- (id<LNQQuery> (^)(NSString *))orderByDescending {
+    return ^id<LNQQuery> (NSString *key) {
+        [_operators addObject:[[LNQSortDescriptor alloc] initWithKey:key descending:YES]];
+        return self;
+    };
+}
+
 - (NSArray *)executeQuery {
     NSArray *result = [NSArray arrayWithArray:_inputArray];
     for (id<LNQQueryOperator> operator in _operators) {
         if ([operator isKindOfClass:[LNQProjection class]]) {
             LNQProjection *projection = (LNQProjection *)operator;
-            result = [result arrayByMappingArrayUsingProjectionBlock:projection.block];
+            result = [result LNQ_mappedArrayUsingProjection:projection];
         } else if ([operator isKindOfClass:[LNQFilter class]]) {
             LNQFilter *filter = (LNQFilter *)operator;
-            result = [result arrayByFilteringArrayUsingFilterBlock:filter.block];
+            result = [result LNQ_filteredArrayUsingFilter:filter];
+        } else if ([operator isKindOfClass:[LNQSortDescriptor class]]) {
+            LNQSortDescriptor *sortDescriptor = (LNQSortDescriptor *)operator;
+            result = [result LNQ_sortedArrayUsingDescriptor:sortDescriptor];
         }
     }
     return [result copy];
