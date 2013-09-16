@@ -12,7 +12,7 @@
 SpecBegin(NSArray_LNQAdditions)
 
 describe(@"select", ^{
-    it(@"should return array of items projected by block", ^{
+    it(@"should return array of items returned by block", ^{
         NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
         
         NSArray *firstNames = people.select(^(LNQTestPerson *p) {
@@ -25,7 +25,7 @@ describe(@"select", ^{
 });
 
 describe(@"selectMany", ^{
-    it(@"should return flattened array of items projected by block", ^{
+    it(@"should return flattened array of items returned by block", ^{
         NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
         
         NSArray *phoneNumbers = people.selectMany(^(LNQTestPerson *p) {
@@ -38,7 +38,7 @@ describe(@"selectMany", ^{
 });
 
 describe(@"where", ^{
-    it(@"should return array with items restricted by block", ^{
+    it(@"should return array with items filtered by block", ^{
         NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
         
         LNQTestPerson *result = people.where(^(LNQTestPerson *p) {
@@ -72,6 +72,17 @@ describe(@"orderByDescending", ^{
         
         NSArray *expectedNames = @[@"Mary", @"Bob"];
         expect(firstNames).to.equal(expectedNames);
+    });
+});
+
+describe(@"sum", ^{
+    it(@"should return sum of numbers returned by block", ^{
+        NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
+        
+        NSNumber *sumOfAges = people.sum(^(LNQTestPerson *p) {
+            return p.age;
+        });
+        expect(sumOfAges).to.equal(@85);
     });
 });
 

@@ -10,6 +10,7 @@
 
 typedef id (^LNQProjectionBlock)(id);
 typedef BOOL (^LNQRestrictionBlock)(id);
+typedef NSNumber* (^LNQNumericBlock)(id);
 
 @protocol LNQQueryOperator <NSObject>
 

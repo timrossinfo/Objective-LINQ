@@ -7,7 +7,6 @@
 //
 
 #import "LNQQuery.h"
-#import "LNQOrdering.h"
 #import "NSArray+LNQAdditions.h"
 
 @interface LNQQuery()
@@ -28,23 +27,30 @@
 }
 
 - (id<LNQQuery> (^)(LNQProjectionBlock))select {
-    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
-        [_operators addObject:[[LNQSelect alloc] initWithBlock:projectionBlock]];
+    return ^id<LNQQuery> (LNQProjectionBlock block) {
+        [_operators addObject:[[LNQSelect alloc] initWithBlock:block]];
         return self;
     };
 }
 
 - (id<LNQQuery> (^)(LNQProjectionBlock))selectMany {
-    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
-        [_operators addObject:[[LNQSelectMany alloc] initWithBlock:projectionBlock]];
+    return ^id<LNQQuery> (LNQProjectionBlock block) {
+        [_operators addObject:[[LNQSelectMany alloc] initWithBlock:block]];
         return self;
     };
 }
 
 - (id<LNQQuery> (^)(LNQRestrictionBlock))where {
-    return ^id<LNQQuery> (LNQRestrictionBlock restrictionBlock) {
-        [_operators addObject:[[LNQWhere alloc] initWithBlock:restrictionBlock]];
+    return ^id<LNQQuery> (LNQRestrictionBlock block) {
+        [_operators addObject:[[LNQWhere alloc] initWithBlock:block]];
         return self;
+    };
+}
+
+- (NSNumber *(^)(LNQNumericBlock))sum {
+    return ^NSNumber *(LNQNumericBlock block) {
+        [_operators addObject:[[LNQSum alloc] initWithBlock:block]];
+        return [[self executeQuery] lastObject];
     };
 }
 
@@ -74,6 +80,9 @@
         } else if ([operator isKindOfClass:[LNQWhere class]]) {
             LNQWhere *where = (LNQWhere *)operator;
             result = [result LNQ_filteredArrayUsingWhere:where];
+        } else if ([operator isKindOfClass:[LNQSum class]]) {
+            LNQSum *sum = (LNQSum *)operator;
+            result = @[[result LNQ_numberUsingSum:sum]];
         } else if ([operator isKindOfClass:[LNQOrdering class]]) {
             LNQOrdering *ordering = (LNQOrdering *)operator;
             result = [result LNQ_sortedArrayUsingOrdering:ordering];

@@ -7,14 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LNQQueryOperator.h"
 #import "LNQSelect.h"
+#import "LNQSelectMany.h"
 #import "LNQWhere.h"
+#import "LNQSum.h"
+#import "LNQOrdering.h"
 
 @protocol LNQQuery <NSObject>
 
-@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
-@property (nonatomic, copy, readonly) id<LNQQuery> (^selectMany)(LNQProjectionBlock projectionBlock);
-@property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQRestrictionBlock restrictionBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock block);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^selectMany)(LNQProjectionBlock block);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQRestrictionBlock block);
+@property (nonatomic, copy, readonly) NSNumber *(^sum)(LNQNumericBlock block);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderBy)(NSString *key);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderByDescending)(NSString *key);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();

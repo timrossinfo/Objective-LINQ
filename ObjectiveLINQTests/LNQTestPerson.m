@@ -14,6 +14,7 @@
     LNQTestPerson *person = [LNQTestPerson new];
     person.firstName = @"Bob";
     person.phoneNumbers = @[@960822, @960285];
+    person.age = @33;
     return person;
 }
 
@@ -21,6 +22,7 @@
     LNQTestPerson *person = [LNQTestPerson new];
     person.firstName = @"Mary";
     person.phoneNumbers = @[@960500, @960506];
+    person.age = @52;
     return person;
 }
 

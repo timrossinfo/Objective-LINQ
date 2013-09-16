@@ -11,20 +11,26 @@
 @implementation NSArray (LNQAdditions)
 
 - (id<LNQQuery> (^)(LNQProjectionBlock))select {
-    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
-        return [[LNQQuery alloc] initWithArray:self].select(projectionBlock);
+    return ^id<LNQQuery> (LNQProjectionBlock block) {
+        return [[LNQQuery alloc] initWithArray:self].select(block);
     };
 }
 
 - (id<LNQQuery> (^)(LNQProjectionBlock))selectMany {
-    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
-        return [[LNQQuery alloc] initWithArray:self].selectMany(projectionBlock);
+    return ^id<LNQQuery> (LNQProjectionBlock block) {
+        return [[LNQQuery alloc] initWithArray:self].selectMany(block);
     };
 }
 
 - (id<LNQQuery> (^)(LNQRestrictionBlock))where {
-    return ^id<LNQQuery>(LNQRestrictionBlock restrictionBlock) {
-        return [[LNQQuery alloc] initWithArray:self].where(restrictionBlock);
+    return ^id<LNQQuery>(LNQRestrictionBlock block) {
+        return [[LNQQuery alloc] initWithArray:self].where(block);
+    };
+}
+
+- (NSNumber *(^)(LNQNumericBlock))sum {
+    return ^NSNumber *(LNQNumericBlock block) {
+        return [[LNQQuery alloc] initWithArray:self].sum(block);
     };
 }
 
@@ -40,19 +46,28 @@
     };
 }
 
+#pragma mark -
+#pragma mark Helpers
+
+- (NSArray *)mapObjectsUsingBlock:(id (^)(id obj, NSUInteger idx))block {
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[self count]];
+    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [result addObject:block(obj, idx)];
+    }];
+    return [result copy];
+}
+
 - (NSArray *)LNQ_mappedArrayUsingSelect:(LNQSelect *)select {
-    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
-    for (id obj in self) {
-        [arr addObject:select.block(obj)];
-    }
-    return [arr copy];
+    NSArray *arr = [self mapObjectsUsingBlock:^id(id obj, NSUInteger idx) {
+        return select.block(obj);
+    }];
+    return arr;
 }
 
 - (NSArray *)LNQ_mappedArrayUsingSelectMany:(LNQSelectMany *)selectMany {
-    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
-    for (id obj in self) {
-        [arr addObject:selectMany.block(obj)];
-    }
+    NSArray *arr = [self mapObjectsUsingBlock:^id(id obj, NSUInteger idx) {
+        return selectMany.block(obj);
+    }];
     return [arr valueForKeyPath:@"@unionOfArrays.self"];
 }
 
@@ -64,6 +79,13 @@
         }
     }
     return [arr copy];
+}
+
+- (NSNumber *)LNQ_numberUsingSum:(LNQSum *)sum {
+    NSArray *arr = [self mapObjectsUsingBlock:^id(id obj, NSUInteger idx) {
+        return sum.block(obj);
+    }];
+    return [arr valueForKeyPath: @"@sum.self"];
 }
 
 - (NSArray *)LNQ_sortedArrayUsingOrdering:(LNQOrdering *)ordering {
