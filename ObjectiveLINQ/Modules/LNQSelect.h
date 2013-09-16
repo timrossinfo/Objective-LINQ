@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LNQQueryOperator.h"
 
-typedef id (^LNQProjectionBlock)(id);
-
-@interface LNQProjection : NSObject<LNQQueryOperator>
+@interface LNQSelect : NSObject<LNQQueryOperator>
 
 @property (nonatomic, copy, readonly) LNQProjectionBlock block;
 

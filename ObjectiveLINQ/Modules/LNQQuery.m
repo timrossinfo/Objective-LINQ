@@ -29,14 +29,21 @@
 
 - (id<LNQQuery> (^)(LNQProjectionBlock))select {
     return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
-        [_operators addObject:[[LNQProjection alloc] initWithBlock:projectionBlock]];
+        [_operators addObject:[[LNQSelect alloc] initWithBlock:projectionBlock]];
+        return self;
+    };
+}
+
+- (id<LNQQuery> (^)(LNQProjectionBlock))selectMany {
+    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
+        [_operators addObject:[[LNQSelectMany alloc] initWithBlock:projectionBlock]];
         return self;
     };
 }
 
 - (id<LNQQuery> (^)(LNQRestrictionBlock))where {
     return ^id<LNQQuery> (LNQRestrictionBlock restrictionBlock) {
-        [_operators addObject:[[LNQRestriction alloc] initWithBlock:restrictionBlock]];
+        [_operators addObject:[[LNQWhere alloc] initWithBlock:restrictionBlock]];
         return self;
     };
 }
@@ -58,12 +65,15 @@
 - (NSArray *)executeQuery {
     NSArray *result = [NSArray arrayWithArray:_inputArray];
     for (id<LNQQueryOperator> operator in _operators) {
-        if ([operator isKindOfClass:[LNQProjection class]]) {
-            LNQProjection *projection = (LNQProjection *)operator;
-            result = [result LNQ_mappedArrayUsingProjection:projection];
-        } else if ([operator isKindOfClass:[LNQRestriction class]]) {
-            LNQRestriction *restriction = (LNQRestriction *)operator;
-            result = [result LNQ_filteredArrayUsingRestriction:restriction];
+        if ([operator isKindOfClass:[LNQSelect class]]) {
+            LNQSelect *select = (LNQSelect *)operator;
+            result = [result LNQ_mappedArrayUsingSelect:select];
+        } else if ([operator isKindOfClass:[LNQSelectMany class]]) {
+            LNQSelectMany *selectMany = (LNQSelectMany *)operator;
+            result = [result LNQ_mappedArrayUsingSelectMany:selectMany];
+        } else if ([operator isKindOfClass:[LNQWhere class]]) {
+            LNQWhere *where = (LNQWhere *)operator;
+            result = [result LNQ_filteredArrayUsingWhere:where];
         } else if ([operator isKindOfClass:[LNQOrdering class]]) {
             LNQOrdering *ordering = (LNQOrdering *)operator;
             result = [result LNQ_sortedArrayUsingOrdering:ordering];

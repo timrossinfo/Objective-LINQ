@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 elucidcode. All rights reserved.
 //
 
-#import "LNQRestriction.h"
+#import "LNQWhere.h"
 
-@implementation LNQRestriction
+@implementation LNQWhere
 
 - (id)initWithBlock:(LNQRestrictionBlock)block {
     if ((self = [super init])) {

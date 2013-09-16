@@ -16,6 +16,12 @@
     };
 }
 
+- (id<LNQQuery> (^)(LNQProjectionBlock))selectMany {
+    return ^id<LNQQuery> (LNQProjectionBlock projectionBlock) {
+        return [[LNQQuery alloc] initWithArray:self].selectMany(projectionBlock);
+    };
+}
+
 - (id<LNQQuery> (^)(LNQRestrictionBlock))where {
     return ^id<LNQQuery>(LNQRestrictionBlock restrictionBlock) {
         return [[LNQQuery alloc] initWithArray:self].where(restrictionBlock);
@@ -34,18 +40,26 @@
     };
 }
 
-- (NSArray *)LNQ_mappedArrayUsingProjection:(LNQProjection *)projection {
+- (NSArray *)LNQ_mappedArrayUsingSelect:(LNQSelect *)select {
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
     for (id obj in self) {
-        [arr addObject:projection.block(obj)];
+        [arr addObject:select.block(obj)];
     }
     return [arr copy];
 }
 
-- (NSArray *)LNQ_filteredArrayUsingRestriction:(LNQRestriction *)restriction {
+- (NSArray *)LNQ_mappedArrayUsingSelectMany:(LNQSelectMany *)selectMany {
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
     for (id obj in self) {
-        if (restriction.block(obj)) {
+        [arr addObject:selectMany.block(obj)];
+    }
+    return [arr valueForKeyPath:@"@unionOfArrays.self"];
+}
+
+- (NSArray *)LNQ_filteredArrayUsingWhere:(LNQWhere *)where {
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
+    for (id obj in self) {
+        if (where.block(obj)) {
             [arr addObject:obj];
         }
     }

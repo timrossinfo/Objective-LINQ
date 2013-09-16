@@ -8,18 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import "LNQQuery.h"
-#import "LNQProjection.h"
+#import "LNQSelect.h"
+#import "LNQSelectMany.h"
 #import "LNQOrdering.h"
 
 @interface NSArray (LNQAdditions)
 
 @property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^selectMany)(LNQProjectionBlock projectionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQRestrictionBlock restrictionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderBy)(NSString *key);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderByDescending)(NSString *key);
 
-- (NSArray *)LNQ_mappedArrayUsingProjection:(LNQProjection *)projection;
-- (NSArray *)LNQ_filteredArrayUsingRestriction:(LNQRestriction *)restriction;
+- (NSArray *)LNQ_mappedArrayUsingSelect:(LNQSelect *)select;
+- (NSArray *)LNQ_mappedArrayUsingSelectMany:(LNQSelectMany *)selectMany;
+- (NSArray *)LNQ_filteredArrayUsingWhere:(LNQWhere *)where;
 - (NSArray *)LNQ_sortedArrayUsingOrdering:(LNQOrdering *)ordering;
 
 @end

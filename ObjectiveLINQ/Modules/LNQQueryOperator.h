@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef id (^LNQProjectionBlock)(id);
+typedef BOOL (^LNQRestrictionBlock)(id);
+
 @protocol LNQQueryOperator <NSObject>
 
 @end

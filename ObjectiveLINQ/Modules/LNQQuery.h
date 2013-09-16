@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LNQProjection.h"
-#import "LNQRestriction.h"
+#import "LNQSelect.h"
+#import "LNQWhere.h"
 
 @protocol LNQQuery <NSObject>
 
 @property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^selectMany)(LNQProjectionBlock projectionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQRestrictionBlock restrictionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderBy)(NSString *key);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderByDescending)(NSString *key);

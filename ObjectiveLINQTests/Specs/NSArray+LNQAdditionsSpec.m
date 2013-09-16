@@ -12,7 +12,7 @@
 SpecBegin(NSArray_LNQAdditions)
 
 describe(@"select", ^{
-    it(@"should return array with items projected by block", ^{
+    it(@"should return array of items projected by block", ^{
         NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
         
         NSArray *firstNames = people.select(^(LNQTestPerson *p) {
@@ -21,6 +21,19 @@ describe(@"select", ^{
         
         NSArray *expectedNames = @[@"Bob", @"Mary"];
         expect(firstNames).to.equal(expectedNames);
+    });
+});
+
+describe(@"selectMany", ^{
+    it(@"should return flattened array of items projected by block", ^{
+        NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
+        
+        NSArray *phoneNumbers = people.selectMany(^(LNQTestPerson *p) {
+            return p.phoneNumbers;
+        }).toArray();
+        
+        NSArray *expectedNumbers = @[@960822, @960285, @960500, @960506];
+        expect(phoneNumbers).to.equal(expectedNumbers);
     });
 });
 

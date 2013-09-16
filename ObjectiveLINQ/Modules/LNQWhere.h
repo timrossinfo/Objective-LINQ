@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LNQQueryOperator.h"
 
-typedef BOOL (^LNQRestrictionBlock)(id);
-
-@interface LNQRestriction : NSObject<LNQQueryOperator>
+@interface LNQWhere : NSObject<LNQQueryOperator>
 
 @property (nonatomic, copy, readonly) LNQRestrictionBlock block;
 

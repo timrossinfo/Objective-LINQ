@@ -13,12 +13,14 @@
 + (LNQTestPerson *)personBob {
     LNQTestPerson *person = [LNQTestPerson new];
     person.firstName = @"Bob";
+    person.phoneNumbers = @[@960822, @960285];
     return person;
 }
 
 + (LNQTestPerson *)personMary {
     LNQTestPerson *person = [LNQTestPerson new];
     person.firstName = @"Mary";
+    person.phoneNumbers = @[@960500, @960506];
     return person;
 }
 
