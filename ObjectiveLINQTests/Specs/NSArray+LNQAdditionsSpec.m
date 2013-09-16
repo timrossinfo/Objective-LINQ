@@ -12,7 +12,7 @@
 SpecBegin(NSArray_LNQAdditions)
 
 describe(@"select", ^{
-    it(@"should return array of results projected by the block", ^{
+    it(@"should return array with items projected by block", ^{
         NSArray *people = @[[LNQTestPerson personBob], [LNQTestPerson personMary]];
         
         NSArray *firstNames = people.select(^(LNQTestPerson *p) {
@@ -25,7 +25,7 @@ describe(@"select", ^{
 });
 
 describe(@"where", ^{
-    it(@"should return array filtered by block", ^{
+    it(@"should return array with items restricted by block", ^{
         NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
         
         LNQTestPerson *result = people.where(^(LNQTestPerson *p) {
@@ -37,7 +37,7 @@ describe(@"where", ^{
 });
 
 describe(@"orderBy", ^{
-    it(@"should return array of results ordered by key", ^{
+    it(@"should return array of items ordered by key", ^{
         NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
         
         NSArray *firstNames = people.orderBy(@"firstName").select(^(LNQTestPerson *p) {
@@ -50,7 +50,7 @@ describe(@"orderBy", ^{
 });
 
 describe(@"orderByDescending", ^{
-    it(@"should return array of results ordered by key in descending order", ^{
+    it(@"should return array of items ordered by key in descending order", ^{
         NSArray *people = @[[LNQTestPerson personMary], [LNQTestPerson personBob]];
         
         NSArray *firstNames = people.orderByDescending(@"firstName").select(^(LNQTestPerson *p) {

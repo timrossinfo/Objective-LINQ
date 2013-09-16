@@ -7,7 +7,7 @@
 //
 
 #import "LNQQuery.h"
-#import "LNQSortDescriptor.h"
+#import "LNQOrdering.h"
 #import "NSArray+LNQAdditions.h"
 
 @interface LNQQuery()
@@ -34,23 +34,23 @@
     };
 }
 
-- (id<LNQQuery> (^)(LNQFilterBlock))where {
-    return ^id<LNQQuery> (LNQFilterBlock filterBlock) {
-        [_operators addObject:[[LNQFilter alloc] initWithBlock:filterBlock]];
+- (id<LNQQuery> (^)(LNQRestrictionBlock))where {
+    return ^id<LNQQuery> (LNQRestrictionBlock restrictionBlock) {
+        [_operators addObject:[[LNQRestriction alloc] initWithBlock:restrictionBlock]];
         return self;
     };
 }
 
 - (id<LNQQuery> (^)(NSString *))orderBy {
     return ^id<LNQQuery> (NSString *key) {
-        [_operators addObject:[[LNQSortDescriptor alloc] initWithKey:key descending:NO]];
+        [_operators addObject:[[LNQOrdering alloc] initWithKey:key descending:NO]];
         return self;
     };
 }
 
 - (id<LNQQuery> (^)(NSString *))orderByDescending {
     return ^id<LNQQuery> (NSString *key) {
-        [_operators addObject:[[LNQSortDescriptor alloc] initWithKey:key descending:YES]];
+        [_operators addObject:[[LNQOrdering alloc] initWithKey:key descending:YES]];
         return self;
     };
 }
@@ -61,12 +61,12 @@
         if ([operator isKindOfClass:[LNQProjection class]]) {
             LNQProjection *projection = (LNQProjection *)operator;
             result = [result LNQ_mappedArrayUsingProjection:projection];
-        } else if ([operator isKindOfClass:[LNQFilter class]]) {
-            LNQFilter *filter = (LNQFilter *)operator;
-            result = [result LNQ_filteredArrayUsingFilter:filter];
-        } else if ([operator isKindOfClass:[LNQSortDescriptor class]]) {
-            LNQSortDescriptor *sortDescriptor = (LNQSortDescriptor *)operator;
-            result = [result LNQ_sortedArrayUsingDescriptor:sortDescriptor];
+        } else if ([operator isKindOfClass:[LNQRestriction class]]) {
+            LNQRestriction *restriction = (LNQRestriction *)operator;
+            result = [result LNQ_filteredArrayUsingRestriction:restriction];
+        } else if ([operator isKindOfClass:[LNQOrdering class]]) {
+            LNQOrdering *ordering = (LNQOrdering *)operator;
+            result = [result LNQ_sortedArrayUsingOrdering:ordering];
         }
     }
     return [result copy];

@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "LNQProjection.h"
-#import "LNQFilter.h"
+#import "LNQRestriction.h"
 
 @protocol LNQQuery <NSObject>
 
 @property (nonatomic, copy, readonly) id<LNQQuery> (^select)(LNQProjectionBlock projectionBlock);
-@property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQFilterBlock filterBlock);
+@property (nonatomic, copy, readonly) id<LNQQuery> (^where)(LNQRestrictionBlock restrictionBlock);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderBy)(NSString *key);
 @property (nonatomic, copy, readonly) id<LNQQuery> (^orderByDescending)(NSString *key);
 @property (nonatomic, copy, readonly) NSArray *(^toArray)();

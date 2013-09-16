@@ -1,5 +1,5 @@
 //
-//  LNQSortDescriptor.h
+//  LNQOrdering.h
 //  ObjectiveLINQ
 //
 //  Created by Tim Ross on 15/09/13.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LNQQueryOperator.h"
 
-@interface LNQSortDescriptor : NSObject<LNQQueryOperator>
+@interface LNQOrdering : NSObject<LNQQueryOperator>
 
 @property (nonatomic, copy, readonly) NSString *key;
 @property (nonatomic, assign, readonly) BOOL descending;

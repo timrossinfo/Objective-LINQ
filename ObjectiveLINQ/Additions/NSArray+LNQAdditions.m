@@ -16,9 +16,9 @@
     };
 }
 
-- (id<LNQQuery> (^)(LNQFilterBlock))where {
-    return ^id<LNQQuery>(LNQFilterBlock filterBlock) {
-        return [[LNQQuery alloc] initWithArray:self].where(filterBlock);
+- (id<LNQQuery> (^)(LNQRestrictionBlock))where {
+    return ^id<LNQQuery>(LNQRestrictionBlock restrictionBlock) {
+        return [[LNQQuery alloc] initWithArray:self].where(restrictionBlock);
     };
 }
 
@@ -42,19 +42,19 @@
     return [arr copy];
 }
 
-- (NSArray *)LNQ_filteredArrayUsingFilter:(LNQFilter *)filter {
+- (NSArray *)LNQ_filteredArrayUsingRestriction:(LNQRestriction *)restriction {
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:self.count];
     for (id obj in self) {
-        if (filter.block(obj)) {
+        if (restriction.block(obj)) {
             [arr addObject:obj];
         }
     }
     return [arr copy];
 }
 
-- (NSArray *)LNQ_sortedArrayUsingDescriptor:(LNQSortDescriptor *)sortDescriptor {
-    return [self sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:sortDescriptor.key
-                                                                           ascending:!sortDescriptor.descending]]];
+- (NSArray *)LNQ_sortedArrayUsingOrdering:(LNQOrdering *)ordering {
+    return [self sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:ordering.key
+                                                                           ascending:!ordering.descending]]];
 }
 
 @end
